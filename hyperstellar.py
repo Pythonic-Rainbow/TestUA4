@@ -50,13 +50,7 @@ download_url = artifact['archive_download_url']
 with open('hyperstellar-token.txt') as f:
     token = f.readline().rstrip('\n')
 req = request.Request(download_url, headers={'Authorization': f'Bearer {token}'})
-os.chdir('./Hyperstellar')
 print('Downloading')
 with request.urlopen(req) as resp:
     with open('bot.zip', 'wb') as f:
         f.write(resp.read())
-print('Unzipping')
-with ZipFile('bot.zip') as f:
-    f.extractall()
-print('Removing zip')
-os.remove('bot.zip')
